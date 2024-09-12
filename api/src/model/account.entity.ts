@@ -1,19 +1,21 @@
 /*
  *
  */
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, PrimaryColumn, Column } from 'typeorm';
+import { ulid } from 'ulid';
 
 @Entity()
-export class Account {
-  @PrimaryGeneratedColumn()
+export class AccountEntity {
+  @PrimaryColumn('varchar', { length: 26, default: () => `'${ulid()}'`})
   private _id: string;
 
-  @Column()
+  @Column({ unique: true, nullable: true })
   private _email: string;
 
-  @Column()
+  @Column({ nullable: true })
   private _firstName: string;
-  @Column()
+
+  @Column({ nullable: true })
   private _lastName: string;
 
   constructor(id: string, email: string, firstName: string, lastName: string) {

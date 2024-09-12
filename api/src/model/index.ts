@@ -1,3 +1,3 @@
-import { Account } from './account';
+import { AccountEntity } from './account.entity';
 
-export default { Account };
+export default { Account: AccountEntity };

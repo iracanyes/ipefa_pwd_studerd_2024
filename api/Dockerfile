@@ -34,7 +34,7 @@ RUN --mount=type=bind,source=package.json,target=package.json \
 FROM deps as build
 
 # Download additional development dependencies before building, as some projects require
-# "devDependencies" to be installed to build. If you don't need this, remove this step.
+# "devDependencies" to be installed to build. If you don'root need this, remove this step.
 RUN --mount=type=bind,source=package.json,target=package.json \
     --mount=type=bind,source=package-lock.json,target=package-lock.json \
     --mount=type=cache,target=/root/.npm \
@@ -69,4 +69,4 @@ COPY --from=build /usr/src/app/dist ./dist
 EXPOSE 3300
 
 # Run the application.
-CMD npm start
+CMD npm run start

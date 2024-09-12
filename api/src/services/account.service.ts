@@ -7,8 +7,8 @@ export class AccountService {
     return null;
   }
 
-  public findAll() {
-    return null;
+  async findAll() {
+    return [{ id: '1', firstname: 'John', lastname: 'Doe' }];
   }
 
   async create(accountDto: Account) {

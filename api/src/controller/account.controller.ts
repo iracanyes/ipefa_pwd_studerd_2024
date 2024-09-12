@@ -10,32 +10,48 @@ import {
   HttpException,
   HttpStatus,
   Param,
-  Post, Put,
+  Post,
+  Put,
 } from '@nestjs/common';
 import { AccountService } from '../services/account.service';
 import { Builder } from 'builder-pattern';
 import { Account } from '../model/account.interface';
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { ApiCodeResponse, ApiResponse } from '@common/api';
 
+@ApiTags('Accounts')
 @Controller('accounts')
 export class AccountController {
   constructor(private accountService: AccountService) {}
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    const account = this.accountService.findById(id);
-
-    return account;
+  @Get()
+  async findAll() {
+    const accounts = await this.accountService.findAll();
+    return {
+      code: ApiCodeResponse.SUCCESS,
+      result: true,
+      data: accounts,
+    };
   }
 
-  @Get()
-  findAll() {
-    const accounts = this.accountService.findAll();
-    return accounts;
+  @ApiOperation({
+    summary: 'Get AccountEntity',
+    description: 'Get AccountEntity Information',
+  })
+  @Get(':id')
+  async findOne(@Param('id') id: string): Promise<ApiResponse> {
+    const account = this.accountService.findById(id);
+
+    return {
+      code: ApiCodeResponse.SUCCESS,
+      result: true,
+      data: account,
+    };
   }
 
   @Post('create')
   @HttpCode(HttpStatus.CREATED)
-  async createAccount(@Body() data: Account): Promise<Account> {
+  async createAccount(@Body() data: Account): Promise<ApiResponse> {
     if (data == null) {
       throw new HttpException('Incorrect body', HttpStatus.NOT_FOUND);
     }
@@ -48,19 +64,33 @@ export class AccountController {
 
     const account = await this.accountService.create(accountDto);
 
-    return account;
+    return {
+      code: ApiCodeResponse.ACCOUNT_CREATED,
+      result: true,
+      data: account,
+    };
   }
 
   @Put(':id')
   @HttpCode(HttpStatus.OK)
-  async updateAccount(@Param('id') id: string, @Body() data: Account): Promise<Account> {
+  async updateAccount(@Param('id') id: string, @Body() data: Account): Promise<ApiResponse> {
     const account = await this.accountService.update(id, data);
 
-    return account;
+    return {
+      code: ApiCodeResponse.ACCOUNT_UPDATED,
+      result: true,
+      data: account,
+    };
   }
 
   @Delete('delete/:id')
-  async deleteAccount(@Param('id') id: string) {
-    this.accountService.delete(id);
+  async deleteAccount(@Param('id') id: string): Promise<ApiResponse> {
+    const data = await this.accountService.delete(id);
+
+    return {
+      code: ApiCodeResponse.ACCOUNT_DELETED,
+      result: true,
+      data: data,
+    };
   }
 }

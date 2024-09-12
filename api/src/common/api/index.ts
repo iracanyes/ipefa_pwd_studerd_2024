@@ -1,2 +1,4 @@
 import { ApiCodeResponse } from './api-code.response';
-export { ApiCodeResponse };
+import { ApiResponse } from './api.response';
+
+export { ApiCodeResponse, ApiResponse };
