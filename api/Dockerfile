@@ -69,4 +69,4 @@ COPY --from=build /usr/src/app/dist ./dist
 EXPOSE 3300
 
 # Run the application.
-CMD npm run start
+CMD npm run start:prod

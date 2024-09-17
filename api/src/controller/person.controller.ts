@@ -20,8 +20,8 @@ import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { ApiCodeResponse, ApiResponse } from '@common/api';
 
 @ApiTags('Accounts')
-@Controller('accounts')
-export class AccountController {
+@Controller('person')
+export class PersonController {
   constructor(private accountService: AccountService) {}
 
   @Get()
@@ -35,8 +35,8 @@ export class AccountController {
   }
 
   @ApiOperation({
-    summary: 'Get AccountEntity',
-    description: 'Get AccountEntity Information',
+    summary: 'Get PersonEntity',
+    description: 'Get PersonEntity Information',
   })
   @Get(':id')
   async findOne(@Param('id') id: string): Promise<ApiResponse> {

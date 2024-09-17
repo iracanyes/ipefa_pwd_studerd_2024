@@ -4,7 +4,7 @@
  * Voici d’ailleurs un lien vers les codes HTTP
  * https://fr.wikipedia.org/wiki/Liste_des_codes_HTTP
  */
-import { ApiException } from '../exceptions/api.exception';
+import { ApiException } from '@common/api/exceptions/api.exception';
 import { ApiCodeResponse } from '@common/api';
 
 export class TestException extends ApiException {

@@ -1,4 +1,4 @@
-import { ApiException } from '../src/exceptions/api.exception';
+import { ApiException } from '@common/api/exceptions/api.exception';
 import { ApiCodeResponse } from '@common/api';
 
 export class TestException extends ApiException {

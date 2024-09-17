@@ -2,9 +2,9 @@ import { INestApplication } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 class SwaggerConfig {
-	constructor() {}
+  constructor() {}
 
-	config(app: INestApplication<any>) {
+  config(app: INestApplication<any>) {
     const config = new DocumentBuilder()
       .setTitle(process.env.APP_NAME)
       .setDescription('NestJS Swagger Document')
@@ -25,7 +25,7 @@ class SwaggerConfig {
     const document = SwaggerModule.createDocument(app, config);
     // Setup the route for swagger docs
     SwaggerModule.setup('docs', app, document, {
-      jsonDocumentUrl: 'swagger.json'
+      jsonDocumentUrl: 'swagger.json',
     });
   }
 }

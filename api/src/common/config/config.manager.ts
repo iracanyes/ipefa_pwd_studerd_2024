@@ -5,8 +5,14 @@
  * and ensureValues method to validate all required environment variables are set at init of the app
  */
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
-import { ConfigKey, configMinimalKeys } from '@common/config/enum/config-key.enum';
+import { ConfigKey, configMinimalKeys } from '@common/enum/config-key.enum';
 import 'dotenv/config';
+import { Person } from '@model/person.entity';
+import { Account } from '@model/account.entity';
+import { Address } from '@model/address.entity';
+import { Token } from '@security/model';
+import { Credential } from '@security/model';
+import { Car } from '@model/car.entity';
 
 class ConfigManager {
   constructor(private env: { [k: string]: string | undefined }) {}
@@ -20,12 +26,7 @@ class ConfigManager {
   getValue(key: ConfigKey, throwOnMissing: boolean = true): string {
     const value = this.env[key];
 
-    console.log(`getValue: { key: ${key}, value: ${value}`);
-
     if (!value && throwOnMissing) {
-      console.log(
-        `getValue - Error : { key: ${key}, value: ${value}, value2: ${ConfigKey[key]}, test: ${this.env[key]} }`,
-      );
       //console.log(this.env);
       throw new Error(`Config error - missing env.${key}`);
     }
@@ -44,7 +45,7 @@ class ConfigManager {
       username: this.getValue(ConfigKey.DB_USER),
       password: this.getValue(ConfigKey.DB_PASSWORD),
       database: this.getValue(ConfigKey.DB_DATABASE),
-      entities: [],
+      entities: [Person, Account, Address, Car, Credential, Token],
       subscribers: [],
       // Only in dev mode, migrate all changes made to entities
       synchronize:

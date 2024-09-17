@@ -20,6 +20,8 @@
     "paths": {
       "@common/*" : ["./common/*"],
       "@root/*": ["./root/*"],
+      "@security/*": ["./security/*"],
+      "@model/*": ["./model/*"],
     }
   }
 }
