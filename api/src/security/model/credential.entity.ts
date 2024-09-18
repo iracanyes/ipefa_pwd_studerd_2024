@@ -6,6 +6,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import { credentialPkGenerator } from '@common/config';
+import { Exclude } from 'class-transformer';
 
 @Entity()
 export class Credential {
@@ -22,6 +23,7 @@ export class Credential {
   @Column({ name: 'username', nullable: false, unique: true })
   username: string;
 
+  @Exclude({ toPlainOnly: true })
   @Column({ name: 'password', nullable: true })
   password: string;
 

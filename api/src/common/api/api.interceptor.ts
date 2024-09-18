@@ -11,6 +11,7 @@ import { map, Observable } from 'rxjs';
 import { ApiCodeResponse } from '@common/api/api-code.response';
 import { ConfigKey, configManager } from '@common/config';
 import { isNil } from 'lodash';
+import { instanceToPlain } from 'class-transformer';
 
 export class ApiInterceptor implements NestInterceptor {
   private readonly logger: Logger = new Logger(ApiInterceptor.name);
@@ -29,7 +30,11 @@ export class ApiInterceptor implements NestInterceptor {
         map((response: any) => {
           return {
             code: this.map(path),
-            data: response,
+            /**
+             * instanceToPlain from class-transformer will understand @Exclude({ toPlainOnly: true })
+             * and exclude the password when serializing Credential object
+             */
+            data: instanceToPlain(response),
             result: true,
           };
         })

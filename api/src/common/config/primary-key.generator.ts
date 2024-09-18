@@ -5,3 +5,4 @@ export const personPkGenerator = monotonicFactory();
 export const addressPkGenerator = monotonicFactory();
 export const credentialPkGenerator = monotonicFactory();
 export const carPkGenerator = monotonicFactory();
+export const tokenPkGenerator = monotonicFactory();

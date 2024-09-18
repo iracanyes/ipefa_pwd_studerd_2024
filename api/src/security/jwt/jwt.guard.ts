@@ -26,7 +26,7 @@ import { Credential } from '@security/model';
 
 @Injectable()
 export class JwtGuard implements CanActivate {
-  private readonly _looger = new Logger(JwtGuard.name);
+  private readonly _logger = new Logger(JwtGuard.name);
 
   constructor(
     private readonly jwtService: JwtService,
@@ -53,17 +53,16 @@ export class JwtGuard implements CanActivate {
       try {
         const id = this.jwtService.verify(
           request.headers['authorization'].replace('Bearer ', ''),
-        );
+        ).sub;
 
-        return from(this.securityService.detail(id))
-          .pipe(
-            map((user: Credential) => {
-              request.user = user;
-              return true;
-            })
-          );
+        return from(this.securityService.detail(id)).pipe(
+          map((user: Credential) => {
+            request.user = user;
+            return true;
+          }),
+        );
       } catch (e) {
-        this._looger.error(e.message);
+        this._logger.error(e.message);
         throw new TokenExpiredException();
       }
     }

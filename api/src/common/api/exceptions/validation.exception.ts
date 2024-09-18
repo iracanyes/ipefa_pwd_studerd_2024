@@ -16,14 +16,18 @@ export class ValidationException extends HttpException {
   }
 }
 
+/**
+ * Convert validation error to ApiCodeResponse format
+ * @param error
+ */
 export const validationErrorToApiCodeResponse = (
   error: ValidationError,
 ): ApiCodeResponse[] => {
   return Object.keys(error.constraints).map((k: string) => {
     // Debug
-    console.log(`${error.property} ${k} ${camelToSnake(k)}`);
+    //console.log(`${error.property} ${k} ${camelToSnake(k)}`);
 
-
+    // k is the constraints violated
     const code =
       ApiCodeResponse[
         `${camelToSnake(error.property)}_${camelToSnake(k)}` as keyof typeof ApiCodeResponse

@@ -21,7 +21,7 @@
       "@common/*" : ["./common/*"],
       "@root/*": ["./root/*"],
       "@security/*": ["./security/*"],
-      "@model/*": ["./model/*"],
+      "@module/*": ["./module/*"],
     }
   }
 }

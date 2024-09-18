@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { PersonController } from '../controller/person.controller';
-import { AccountService } from '../services/account.service';
+import { PersonController } from '@module/test/controller/person.controller';
+import { AccountService } from '@module/test/services/account.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { configManager } from '@common/config/config.manager';
 import { SecurityModule } from '@security/security.module';

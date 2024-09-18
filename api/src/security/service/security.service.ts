@@ -32,7 +32,7 @@ export class SecurityService {
 
   /**
    * Allow to retrieve Credential object by ID
-   * @param id
+   * @param id Credential ID
    */
   async detail(id: string): Promise<Credential> {
     const result = await this.credentialRepository.findOneBy({
@@ -96,7 +96,7 @@ export class SecurityService {
    * Allow to register a user
    * @param payload
    */
-  async signup(payload: SignupPayload): Promise<Credential | null> {
+  async signup(payload: SignupPayload): Promise<Token | null> {
     const result: Credential | null = await this.credentialRepository.findOneBy(
       {
         username: payload.username,
@@ -109,12 +109,13 @@ export class SecurityService {
 
     try {
       const encryptedPassword =
-        (payload.facebookHash && payload.facebookHash.length === 0)
-          || (payload.googleHash && payload.googleHash.length === 0)
+        !(payload.facebookHash && payload.facebookHash.length === 0)
+          || !(payload.googleHash && payload.googleHash.length === 0)
           ? await encryptPassword(payload.password)
           : '';
 
-      return this.credentialRepository.save(
+      // Instead of returning the newly created user
+      await this.credentialRepository.save(
         Builder<Credential>()
           .username(payload.username)
           .password(encryptedPassword)
@@ -123,6 +124,15 @@ export class SecurityService {
           .email(payload.mail)
           .build(),
       );
+      // We return the connexion Token
+      const signInPayload: SignInPayload = {
+        ...payload,
+        socialLogin: !(
+          isNil(payload.facebookHash) && isNil(payload.googleHash)
+        ),
+      };
+
+      return this.signIn(signInPayload, false);
     } catch (error) {
       this.logger.error(error.message);
       throw new SignupException();

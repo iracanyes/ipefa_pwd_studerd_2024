@@ -13,7 +13,7 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
-import { AccountService } from '../services/account.service';
+import { AccountService } from '@module/test/services/account.service';
 import { Builder } from 'builder-pattern';
 import { Account } from '../model/account.interface';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
@@ -73,7 +73,10 @@ export class PersonController {
 
   @Put(':id')
   @HttpCode(HttpStatus.OK)
-  async updateAccount(@Param('id') id: string, @Body() data: Account): Promise<ApiResponse> {
+  async updateAccount(
+    @Param('id') id: string,
+    @Body() data: Account,
+  ): Promise<ApiResponse> {
     const account = await this.accountService.update(id, data);
 
     return {
