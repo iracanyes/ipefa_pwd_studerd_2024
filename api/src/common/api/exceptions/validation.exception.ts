@@ -8,7 +8,10 @@ export class ValidationException extends HttpException {
     super(
       {
         code: ApiCodeResponse.PAYLOAD_IS_NOT_VALID,
-        data: errors.map((e) => validationErrorToApiCodeResponse(e)).flat(),
+        // Alternative: Only if you didn't define custom validation exception message
+        // using library decorators
+        // data: errors.map((e) => validationErrorToApiCodeResponse(e)).flat(),
+        data: errors.map((e) => Object.values(e.constraints)).flat(),
         result: false,
       },
       499,

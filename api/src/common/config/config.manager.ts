@@ -7,12 +7,13 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { ConfigKey, configMinimalKeys } from '@common/enum/config-key.enum';
 import 'dotenv/config';
-import { Person } from '@module/test/model/person.entity';
-import { Account } from '@module/test/model/account.entity';
-import { Address } from '@module/test/model/address.entity';
+import { Person } from '@module-test/model/person.entity';
+import { Account } from '@module-test/model/account.entity';
+import { Address } from '@member/model/entity/address.entity';
 import { Token } from '@security/model';
 import { Credential } from '@security/model';
-import { Car } from '@module/test/model/car.entity';
+import { Car } from '@module-test/model/car.entity';
+import { Member, MemberPlan, MemberSubscription } from '@member/model';
 
 class ConfigManager {
   constructor(private env: { [k: string]: string | undefined }) {}
@@ -47,7 +48,17 @@ class ConfigManager {
       database: this.getValue(ConfigKey.DB_DATABASE),
       // Alternative: look for '*.entity.{js, ts}' files in src directory and subs
       // [__dirname + '/../../**/*.entity{.js, .ts}']
-      entities: [Person, Account, Address, Car, Credential, Token],
+      entities: [
+        Person,
+        Account,
+        Address,
+        Car,
+        Credential,
+        Token,
+        Member,
+        MemberSubscription,
+        MemberPlan,
+      ],
       subscribers: [],
       // Only in dev mode, migrate all changes made to entities
       synchronize:
