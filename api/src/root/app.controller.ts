@@ -11,7 +11,10 @@ import { ApiOperation, ApiTags } from '@nestjs/swagger';
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
-  @ApiOperation({ summary: 'Operation Hello World', description: 'Cette opération est le service de base'})
+  @ApiOperation({
+    summary: 'Operation Hello World',
+    description: 'Cette opération est le service de base',
+  })
   @Get()
   getHello(): Response {
     return this.appService.getHello();
