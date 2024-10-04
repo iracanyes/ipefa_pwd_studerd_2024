@@ -1,0 +1,19 @@
+{
+  "feature": {
+    "security": {
+      "page": {
+        "sign-in": {
+          "label": {
+            "username": "Username",
+            "password": "Password"
+          },
+          "error": {
+            "username-required": "Username required!",
+            "password-required": "Password required!",
+            "description": "You have {{ count }} error(s)!"
+          }
+        }
+      }
+    }
+  }
+}

@@ -42,6 +42,8 @@ export class JwtGuard implements CanActivate {
       context.getHandler(),
       context.getClass(),
     ]);
+    // If the route is public, the method returns true,
+    // else, we validate the access token from request
     return isPublic
       ? true
       : this.validateToken(context.switchToHttp().getRequest());
@@ -51,6 +53,8 @@ export class JwtGuard implements CanActivate {
     //
     if (!isNil(request.headers['authorization'])) {
       try {
+        // Here we verify that the token isn't expired
+        // We extract the token from the header 'authorization'
         const id = this.jwtService.verify(
           request.headers['authorization'].replace('Bearer ', ''),
         ).sub;

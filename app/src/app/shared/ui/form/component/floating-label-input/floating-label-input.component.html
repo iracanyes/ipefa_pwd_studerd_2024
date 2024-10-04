@@ -1,0 +1,18 @@
+<div class="input" [formGroup]="formGroup">
+  <input
+    type="text"
+    class="floating-input"
+    placeholder=""
+    (focus)="inputFocus=true"
+    (blur)="inputFocus=false"
+    [formControl]="control"
+    autocomplete="new-password"
+  />
+
+  <label
+    [class.fixed-label]="inputFocus || control.value.length > 0"
+    class="floating-label">
+    {{ label }}
+  </label>
+
+</div>

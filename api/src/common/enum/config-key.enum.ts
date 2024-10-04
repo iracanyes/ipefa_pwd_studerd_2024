@@ -1,8 +1,8 @@
 /**
- * This enum contains all keys of our environment variables in .env file (at the root of the project)
- * We will use dotenv librairies to retrieve those environment variables
- * In order to load those environment variables, we will execute the below method before the ConfigManager class
- * and in all other places where environment variables are needed.
+ * This enum contains all keys of our environments variables in .env file (at the root of the project)
+ * We will use dotenv librairies to retrieve those environments variables
+ * In order to load those environments variables, we will execute the below method before the ConfigManager class
+ * and in all other places where environments variables are needed.
  */
 //import 'dotenv/config';
 

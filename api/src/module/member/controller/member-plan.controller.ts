@@ -17,7 +17,7 @@ import {
 
 @ApiBearerAuth('access-token')
 @ApiTags("Members' Plan")
-@Controller()
+@Controller('member-plan')
 export class MemberPlanController {
   constructor(private readonly memberPlanService: MemberPlanService) {}
 

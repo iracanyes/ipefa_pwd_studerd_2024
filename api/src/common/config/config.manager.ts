@@ -1,8 +1,8 @@
 /**
  * Config Manager class handle configuration of the application.
- * and retrieving environment variables.
- * We will use getValues to retrieve environment variables.
- * and ensureValues method to validate all required environment variables are set at init of the app
+ * and retrieving environments variables.
+ * We will use getValues to retrieve environments variables.
+ * and ensureValues method to validate all required environments variables are set at init of the app
  */
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { ConfigKey, configMinimalKeys } from '@common/enum/config-key.enum';

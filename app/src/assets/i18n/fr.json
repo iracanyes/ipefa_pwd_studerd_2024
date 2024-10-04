@@ -1,0 +1,19 @@
+{
+  "feature": {
+    "security": {
+      "page": {
+        "sign-in": {
+          "label": {
+            "username": "Identifiant",
+            "password": "Mot de passe"
+          },
+          "error": {
+            "username-required": "Le nom d'utilisateur est requis!",
+            "password-required": "Le mot de passe est requis!",
+            "description": "{ count, plural, =0{Vous n'avez pas d'erreur} one{Vous avez une erreur} other {Vous avez # erreur(s)}}"
+          }
+        }
+      }
+    }
+  }
+}

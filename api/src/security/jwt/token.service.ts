@@ -39,7 +39,7 @@ export class TokenService {
 
       const payload = { sub: credential.credential_id };
 
-      // Dans un souci de sécurité, la clé de hashage du token est différente du refreshToken.
+      // For security purpose, the hashed key for token and refresh token must be différent
       const token = await this.jwtService.signAsync(payload, {
         secret: configManager.getValue(ConfigKey.JWT_TOKEN_SECRET),
         expiresIn: configManager.getValue(ConfigKey.JWT_TOKEN_EXPIRE_IN),
